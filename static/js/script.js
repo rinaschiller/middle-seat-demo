@@ -3,29 +3,28 @@ $( document ).ready(function() {
     console.log( "ready!" );
     var event_ids = []
 
-    $(document).on(
-        'fbload',  //  <---- HERE'S OUR CUSTOM EVENT BEING LISTENED FOR
+    $(document).on( 'fbload',  // Called when Facebook SDK initializes
         function(){
-        FB.api(
-          '/1886000451690456/events',
-          'GET',
-          {},
-          function(response) {
-              // Insert your code here
-              console.log(response);
-          }
-        );
+        var token = "EAADZAHQ1ZBg74BAJEdmpIw70gnxvYtMQynnLiMCjV9v57cXBjcSk5HMTAhgF5vZAVJvRgw0ojDDCUlRJQLFUVIzZBOjQHIUBxVviGmDxHZC2f9Emb6wXBcFeN9uveLbyQMGrFZApCBPOUYglXkhf5i9wozGhxvDmVUJZCbPrUWZAiF8HPBuKyenXft8kBepPNnJ3zrm9GjfaDgZDZD"
+        
+        FB.getLoginStatus(function(response) {
+            if (response.status === 'connected') {
+              var accessToken = response.authResponse.accessToken;
+              FB.api(
+                '/1886000451690456/events',
+                'GET',
+                {access_token: accessToken},
+                function(response) {
+                    console.log(response);
+                }
+              );
+            
+            } 
+          } );
 
-        FB.ui({
-            method: 'share_open_graph',
-            action_type: 'og.likes',
-            action_properties: JSON.stringify({
-              object:'https://developers.facebook.com/docs/javascript/examples',
-            })
-          }, function(response){
-            // Debug response (optional)
-            console.log(response);
-          });
+        
+
+    
               
     });
         
