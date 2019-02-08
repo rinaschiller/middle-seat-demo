@@ -42,8 +42,16 @@ $( document ).ready(function() {
 });
 
 function getPopupHTML(event){
-    var header = "<b>" + event.name + "</b>"
-    var description = "<p>" + event.description + "</p>"
-    var startTime = "<p>" + event.start_time+ "</p>"
-    return header + "</n>" + description + "</n>" + startTime
+    var header = "<b>" + event.name + "</b>";
+    var description = event.description;
+    var date = new Date(event.start_time);
+    var startDate = "<b>Date: </b>"+ date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
+    var startTime = "<b>Time: </b>" + date.getHours() + ":" + date.getMinutes() + "0";
+    var link = "<a href='https://www.facebook.com/events/" + event.id + "'>Check out the Facebook event!</a>";
+    var itemsInPop = [header, description, startDate, startTime, link];
+    var htmlString = "";
+    for (item of itemsInPop){
+        htmlString += item + "<br>"
+    }
+    return htmlString
 }
