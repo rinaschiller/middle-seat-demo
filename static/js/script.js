@@ -26,17 +26,11 @@ $( document ).ready(function() {
                                 .setLngLat([long, lat])
                                 .setPopup(popup)
                                 .addTo(map);
-
-                                
-
                             }
-                           
                         }
-                        
                     }
                 );
-            
-                } 
+            } 
             });              
     });
 });
@@ -47,7 +41,7 @@ function getPopupHTML(event){
     var date = new Date(event.start_time);
     var startDate = "<b>Date: </b>"+ date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
     var startTime = "<b>Time: </b>" + date.getHours() + ":" + date.getMinutes() + "0";
-    var link = "<a href='https://www.facebook.com/events/" + event.id + "'>Check out the Facebook event!</a>";
+    var link = "<a href=\"https://www.facebook.com/events/" + event.id + "\"target=\"_blank\">Check out the Facebook event!</a>";
     var itemsInPop = [header, description, startDate, startTime, link];
     var htmlString = "";
     for (item of itemsInPop){
