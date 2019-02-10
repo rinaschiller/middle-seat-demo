@@ -2,12 +2,11 @@ $( document ).ready(function() {
     mapboxgl.accessToken = 'pk.eyJ1IjoicmluYXNjaGlsbGVyIiwiYSI6ImNqcm1sZmNkcjBra24zeW1uMHQycXY3a2oifQ.hI2dy3oRA5qb48kXdMn5ug';
     var map = new mapboxgl.Map({
         container: 'map',
-        center: [-88.8422, 41.3471],
+        zoom: 6,
         style: 'mapbox://styles/mapbox/streets-v9',
-        zoom: 5
     });
-    
-    var ll = new mapboxgl.LngLat(-73.9749, 40.7736);
+    map.fitBounds([[-133.2421875, 16.972741], [-47.63671875, 52.696361]]);
+
     $(document).on( 'fbload',  // Called when Facebook SDK initializes
         function(){ FB.getLoginStatus(function(response) {
             if (response.status === 'connected') {
@@ -21,7 +20,6 @@ $( document ).ready(function() {
                             if (lat != undefined && long != undefined){
                                 var popup = new mapboxgl.Popup({ offset: 25 })
                                     .setHTML(getPopupHTML(event));
-                                console.log(lat + ", " + long);
                                 new mapboxgl.Marker()
                                 .setLngLat([long, lat])
                                 .setPopup(popup)
@@ -42,7 +40,8 @@ function getPopupHTML(event){
     var startDate = "<b>Date: </b>"+ date.getMonth() + "/" + date.getDate() + "/" + date.getFullYear();
     var startTime = "<b>Time: </b>" + date.getHours() + ":" + date.getMinutes() + "0";
     var link = "<a href=\"https://www.facebook.com/events/" + event.id + "\"target=\"_blank\">Check out the Facebook event!</a>";
-    var itemsInPop = [header, description, startDate, startTime, link];
+    var location = "<b>Location: </b>" + event.place.name
+    var itemsInPop = [header, description, startDate, startTime, location, link];
     var htmlString = "";
     for (item of itemsInPop){
         htmlString += item + "<br>"
