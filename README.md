@@ -1,4 +1,4 @@
-### In order to run locally
+### In order to run locally:
 
 1. Clone the repo
   ```
@@ -23,3 +23,7 @@
   ```
 
 6. Navigate to [http://localhost:5000](http://localhost:5000)
+
+### App Screenshots:
+![Map-Markers](map-markers.png)
+![Popup-Screenshot](popup-screenshot.png)
